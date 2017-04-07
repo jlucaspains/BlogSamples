@@ -1,0 +1,28 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 15
+VisualStudioVersion = 15.0.26228.4
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LPains.Utilities", "LPains.Utilities.csproj", "{C7FE7DC6-CE9B-41E1-8B7F-C75F6E52CC2C}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LPains.Utilities.Tests", "..\LPains.Utilities.Tests\LPains.Utilities.Tests.csproj", "{D9400937-5B16-401E-84B7-0789705A5E7A}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{C7FE7DC6-CE9B-41E1-8B7F-C75F6E52CC2C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C7FE7DC6-CE9B-41E1-8B7F-C75F6E52CC2C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C7FE7DC6-CE9B-41E1-8B7F-C75F6E52CC2C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C7FE7DC6-CE9B-41E1-8B7F-C75F6E52CC2C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D9400937-5B16-401E-84B7-0789705A5E7A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D9400937-5B16-401E-84B7-0789705A5E7A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D9400937-5B16-401E-84B7-0789705A5E7A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D9400937-5B16-401E-84B7-0789705A5E7A}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal

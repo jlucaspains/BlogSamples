@@ -1,0 +1,10 @@
+﻿################################################################################
+# This .gitignore file was automatically created by Microsoft(R) Visual Studio.
+################################################################################
+
+/CSharp/util/LPains.Utilities/packages
+/CSharp/util/LPains.Utilities/obj/Debug
+/CSharp/util/LPains.Utilities/bin/Debug
+/CSharp/util/LPains.Utilities/.vs/LPains.Utilities/v15
+/CSharp/util/LPains.Utilities.Tests/obj/Debug
+/CSharp/util/LPains.Utilities.Tests/bin/Debug
