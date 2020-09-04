@@ -25,7 +25,7 @@
     "@vue/eslint-config-typescript": "^4.0.0",
     "eslint": "^5.16.0",
     "eslint-plugin-vue": "^5.0.0",
-    "node-sass": "^4.13.0",
+    "node-sass": "^4.13.1",
     "sass-loader": "^8.0.1",
     "typescript": "~3.5.3",
     "vue-template-compiler": "^2.6.10"
