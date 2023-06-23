@@ -1,0 +1,17 @@
+{
+    "sslCertificateKeyVaultId": {
+        "value": "/subscriptions/4ead1c66-a55e-4cd7-babf-2e23ad5a6f39/resourceGroups/rg-experiments-soutchcentralus-001/providers/Microsoft.KeyVault/vaults/kv-myapp-dev-001"
+    },
+    "sslCertificateName": {
+        "value": "appgwdemolpains2-lpains-net"
+    },
+    "apgwErrorBaseUrl": {
+        "value": ""
+    },
+    "apgwFirewallMode": {
+        "value": "Prevention"
+    },
+    "webAppCustomHostName": {
+        "value": "appgwdemolpains.lpains.net"
+    }
+}
