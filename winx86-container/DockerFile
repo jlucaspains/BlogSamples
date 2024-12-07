@@ -1,6 +1,6 @@
 # escape=`
 
-FROM mcr.microsoft.com/windows/servercore:ltsc2022-amd64 as runtime
+FROM mcr.microsoft.com/windows/servercore:ltsc2022-amd64 as base-runtime
 
 ENV `
     # Configure web servers to bind to port 8080 when present
@@ -46,13 +46,13 @@ RUN powershell -Command `
 RUN setx /M PATH "%PATH%;C:\Program Files\dotnet"
 RUN setx /M DOTNET_ROOT "C:\Program Files\dotnet"
 
-FROM mcr.microsoft.com/dotnet/sdk:6.0 AS sdk
+FROM mcr.microsoft.com/dotnet/sdk:8.0.11 AS sdk
 WORKDIR /app
 
 COPY ./ ./
 RUN dotnet publish -c Release -o out
 
-FROM mcr.microsoft.com/dotnet/aspnet:6.0
+FROM base-runtime as runtime
 WORKDIR /app
 COPY --from=sdk /app/out .
 ENTRYPOINT ["winx86-container.exe"] 
