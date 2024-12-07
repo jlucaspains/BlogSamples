@@ -1,0 +1,58 @@
+# escape=`
+
+FROM mcr.microsoft.com/windows/servercore:ltsc2022-amd64 as runtime
+
+ENV `
+    # Configure web servers to bind to port 8080 when present
+    ASPNETCORE_HTTP_PORTS=8080 `
+    # Enable detection of running in a container
+    DOTNET_RUNNING_IN_CONTAINER=true `
+    # .NET Runtime version
+    DOTNET_VERSION=8.0.11 `
+    # ASP.NET Core version
+    ASPNET_VERSION=8.0.11
+
+# Install .NET Runtime
+RUN powershell -Command `
+        $ErrorActionPreference = 'Stop'; `
+        $ProgressPreference = 'SilentlyContinue'; `
+        `
+        Invoke-WebRequest -OutFile dotnet.zip https://dotnetcli.azureedge.net/dotnet/Runtime/$Env:DOTNET_VERSION/dotnet-runtime-$Env:DOTNET_VERSION-win-x64.zip; `
+        $dotnet_sha512 = 'a0ed92b8ffeb4efb61a93c3cb7c1ed66529e23cbe60b44d621b49b1cb90159866a3d921630485fc0e2b1660b2001f73752c6fa6fc9dca40145ef4549dd26a1ab'; `
+        if ((Get-FileHash dotnet.zip -Algorithm sha512).Hash -ne $dotnet_sha512) { `
+            Write-Host 'CHECKSUM VERIFICATION FAILED!'; `
+            exit 1; `
+        }; `
+        `
+        mkdir $Env:ProgramFiles\dotnet; `
+        tar -oxzf dotnet.zip -C $Env:ProgramFiles\dotnet; `
+        Remove-Item -Force dotnet.zip
+
+# Install ASP.NET Core Runtime
+RUN powershell -Command `
+        $ErrorActionPreference = 'Stop'; `
+        $ProgressPreference = 'SilentlyContinue'; `
+        `
+        Invoke-WebRequest -OutFile aspnetcore.zip https://dotnetcli.azureedge.net/dotnet/aspnetcore/Runtime/$Env:ASPNET_VERSION/aspnetcore-runtime-$Env:ASPNET_VERSION-win-x64.zip; `
+        $aspnetcore_sha512 = 'a3fafcdbd72e3a34c60c8a607a2c8e4122bef88d8f2fea56d7a87552546adfc646865b99a0cafd8ef945b0db918ed189ad1080e9e5f845f10a25fa9df5961c85'; `
+        if ((Get-FileHash aspnetcore.zip -Algorithm sha512).Hash -ne $aspnetcore_sha512) { `
+            Write-Host 'CHECKSUM VERIFICATION FAILED!'; `
+            exit 1; `
+        }; `
+        `
+        tar -oxzf aspnetcore.zip -C $Env:ProgramFiles\dotnet ./shared/Microsoft.AspNetCore.App; `
+        Remove-Item -Force aspnetcore.zip
+
+RUN setx /M PATH "%PATH%;C:\Program Files\dotnet"
+RUN setx /M DOTNET_ROOT "C:\Program Files\dotnet"
+
+FROM mcr.microsoft.com/dotnet/sdk:6.0 AS sdk
+WORKDIR /app
+
+COPY ./ ./
+RUN dotnet publish -c Release -o out
+
+FROM mcr.microsoft.com/dotnet/aspnet:6.0
+WORKDIR /app
+COPY --from=sdk /app/out .
+ENTRYPOINT ["winx86-container.exe"] 

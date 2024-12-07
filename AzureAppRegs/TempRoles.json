@@ -1,0 +1,35 @@
+[
+  {
+    "allowedMemberTypes": [
+      "User"
+    ],
+    "description": "Can configure aspects the application but generally not make administrative changes",
+    "displayName": "Developer",
+    "id": "07470a96-716a-4688-92fd-6fb452f81202",
+    "isEnabled": true,
+    "origin": "Application",
+    "value": "Developer"
+  },
+  {
+    "allowedMemberTypes": [
+      "User"
+    ],
+    "description": "Can use all app features including write capabilities",
+    "displayName": "Administrator",
+    "id": "25909a57-ce45-49d3-b1f3-4b6f3d03d15a",
+    "isEnabled": true,
+    "origin": "Application",
+    "value": "Administrator"
+  },
+  {
+    "allowedMemberTypes": [
+      "User"
+    ],
+    "description": "Can view data and perform user level actions but not make administrative changes",
+    "displayName": "User",
+    "id": "3e87b7be-a276-4e85-add7-974e0d29fed8",
+    "isEnabled": true,
+    "origin": "Application",
+    "value": "User"
+  }
+]

@@ -1,0 +1,15 @@
+{
+    "requestedAccessTokenVersion": 2,
+    "oauth2PermissionScopes": [
+        {
+            "id": "332a3ddb-38d8-4c69-a59a-1ea9b2058685",
+            "adminConsentDescription": "Read and write information about people",
+            "adminConsentDisplayName": "Read and write information about people",
+            "isEnabled": true,
+            "type": "User",
+            "userConsentDescription": "Read and write information about people",
+            "userConsentDisplayName": "Read and write information about people",
+            "value": "api-read-write"
+        }
+    ]
+}
