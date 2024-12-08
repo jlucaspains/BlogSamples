@@ -17,8 +17,8 @@ RUN powershell -Command `
         $ErrorActionPreference = 'Stop'; `
         $ProgressPreference = 'SilentlyContinue'; `
         `
-        Invoke-WebRequest -OutFile dotnet.zip https://dotnetcli.azureedge.net/dotnet/Runtime/$Env:DOTNET_VERSION/dotnet-runtime-$Env:DOTNET_VERSION-win-x64.zip; `
-        $dotnet_sha512 = 'a0ed92b8ffeb4efb61a93c3cb7c1ed66529e23cbe60b44d621b49b1cb90159866a3d921630485fc0e2b1660b2001f73752c6fa6fc9dca40145ef4549dd26a1ab'; `
+        Invoke-WebRequest -OutFile dotnet.zip https://dotnetcli.azureedge.net/dotnet/Runtime/$Env:DOTNET_VERSION/dotnet-runtime-$Env:DOTNET_VERSION-win-x86.zip; `
+        $dotnet_sha512 = 'CB80A41EA64DB17F2CC21390FEFEAC7342E965FBA3BB6F768C51FDCF7271FBD1399EAAF33EC1162BC206E47BC8D296D28DDAD2139C8A770D02E62FA90AF49A32'; `
         if ((Get-FileHash dotnet.zip -Algorithm sha512).Hash -ne $dotnet_sha512) { `
             Write-Host 'CHECKSUM VERIFICATION FAILED!'; `
             exit 1; `
@@ -33,8 +33,8 @@ RUN powershell -Command `
         $ErrorActionPreference = 'Stop'; `
         $ProgressPreference = 'SilentlyContinue'; `
         `
-        Invoke-WebRequest -OutFile aspnetcore.zip https://dotnetcli.azureedge.net/dotnet/aspnetcore/Runtime/$Env:ASPNET_VERSION/aspnetcore-runtime-$Env:ASPNET_VERSION-win-x64.zip; `
-        $aspnetcore_sha512 = 'a3fafcdbd72e3a34c60c8a607a2c8e4122bef88d8f2fea56d7a87552546adfc646865b99a0cafd8ef945b0db918ed189ad1080e9e5f845f10a25fa9df5961c85'; `
+        Invoke-WebRequest -OutFile aspnetcore.zip https://dotnetcli.azureedge.net/dotnet/aspnetcore/Runtime/$Env:ASPNET_VERSION/aspnetcore-runtime-$Env:ASPNET_VERSION-win-x86.zip; `
+        $aspnetcore_sha512 = 'C0399CF5B217703F1142F3D44A29EB443621F6038FA1BF602C3C661B5A55C13F18A74F90A6ABC3D1C1E1B6A4232A7AB7B9BB19BA7F3454387097E98F79B5FDD2'; `
         if ((Get-FileHash aspnetcore.zip -Algorithm sha512).Hash -ne $aspnetcore_sha512) { `
             Write-Host 'CHECKSUM VERIFICATION FAILED!'; `
             exit 1; `
@@ -46,7 +46,7 @@ RUN powershell -Command `
 RUN setx /M PATH "%PATH%;C:\Program Files\dotnet"
 RUN setx /M DOTNET_ROOT "C:\Program Files\dotnet"
 
-FROM mcr.microsoft.com/dotnet/sdk:8.0.11 AS sdk
+FROM mcr.microsoft.com/dotnet/sdk:8.0-windowsservercore-ltsc2022 AS sdk
 WORKDIR /app
 
 COPY ./ ./
@@ -55,4 +55,5 @@ RUN dotnet publish -c Release -o out
 FROM base-runtime as runtime
 WORKDIR /app
 COPY --from=sdk /app/out .
+RUN DIR
 ENTRYPOINT ["winx86-container.exe"] 
